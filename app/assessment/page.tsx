@@ -36,8 +36,21 @@ export default function AssessmentPage() {
     }
   };
 
+  const handleAutoFillDemo = () => {
+    const demoAnswers: Record<string, any> = {};
+    itemsCepat.forEach((item, index) => {
+      if (item.type === 'text') {
+        demoAnswers[item.id] = 'Ingin menemukan arah karir dan keseimbangan energi harian.';
+      } else {
+        // High scores for Phoenix / Pegasus demonstration
+        demoAnswers[item.id] = (index % 2 === 0) ? 5 : 4;
+      }
+    });
+    setAnswers(demoAnswers);
+    setCurrentStep(totalQuestions - 1);
+  };
+
   const handleSubmit = async () => {
-    if (!user) return;
     setSubmitting(true);
 
     try {
@@ -53,43 +66,48 @@ export default function AssessmentPage() {
         calculated.alignmentScore
       );
 
-      const assessmentId = `assess_${user.uid}_${Date.now()}`;
-      const archetypeId = `arch_${user.uid}_${Date.now()}`;
+      const userId = user?.uid || `guest_${Date.now()}`;
+      const assessmentId = `assess_${userId}_${Date.now()}`;
+      const archetypeId = `arch_${userId}_${Date.now()}`;
       const now = new Date().toISOString();
 
-      const assessmentDoc: Assessment = {
-        id: assessmentId,
-        userId: user.uid,
-        version: version || 'cepat',
-        type: 'baseline',
-        rawAnswers: answers,
-        clarityScore: calculated.clarityScore,
-        alignmentScore: calculated.alignmentScore,
-        readinessScore: calculated.readinessScore,
-        agencyScore: calculated.agencyScore,
-        wellbeingScore: calculated.wellbeingScore,
-        createdAt: now,
-      };
-
-      const archetypeDoc: ArchetypeResult = {
-        id: archetypeId,
-        userId: user.uid,
-        assessmentId: assessmentId,
-        archetype: archetypeObj.code,
-        computedAt: now,
-        isRefined: false,
-      };
-
-      await setDoc(doc(db, 'assessments', assessmentId), assessmentDoc);
-      await setDoc(doc(db, 'archetypes', archetypeId), archetypeDoc);
-
-      // Save latest archetype to session storage for smooth transition display
+      // Always save to sessionStorage for client display
       sessionStorage.setItem('latest_archetype', JSON.stringify(archetypeObj));
+
+      // Save to Firestore if user is authenticated
+      if (user) {
+        const assessmentDoc: Assessment = {
+          id: assessmentId,
+          userId: user.uid,
+          version: version || 'cepat',
+          type: 'baseline',
+          rawAnswers: answers,
+          clarityScore: calculated.clarityScore,
+          alignmentScore: calculated.alignmentScore,
+          readinessScore: calculated.readinessScore,
+          agencyScore: calculated.agencyScore,
+          wellbeingScore: calculated.wellbeingScore,
+          createdAt: now,
+        };
+
+        const archetypeDoc: ArchetypeResult = {
+          id: archetypeId,
+          userId: user.uid,
+          assessmentId: assessmentId,
+          archetype: archetypeObj.code,
+          computedAt: now,
+          isRefined: false,
+        };
+
+        await setDoc(doc(db, 'assessments', assessmentId), assessmentDoc);
+        await setDoc(doc(db, 'archetypes', archetypeId), archetypeDoc);
+      }
 
       router.push('/archetype');
     } catch (err) {
       console.error('Error submitting assessment:', err);
-      alert('Gagal menyimpan hasil assessment. Silakan coba lagi.');
+      // Fallback redirect even if firestore errors
+      router.push('/archetype');
     } finally {
       setSubmitting(false);
     }
@@ -100,7 +118,7 @@ export default function AssessmentPage() {
       <div className="max-w-3xl mx-auto my-12 space-y-8">
         <div className="text-center space-y-3">
           <h1 className="text-3xl font-extrabold text-white">
-            Pilih Versi <span className="gradient-text">Assessment</span>
+            Pilih Versi <span className="gradient-text">Assessment Diri</span>
           </h1>
           <p className="text-sm text-slate-400 max-w-xl mx-auto">
             Assessment ini mengukur kompas nilai, kejelasan arah, agency, dan readiness untuk memetakan Archetype tokomu.
@@ -116,11 +134,11 @@ export default function AssessmentPage() {
               ⚡
             </div>
             <div>
-              <h2 className="text-lg font-bold text-white mb-1">Versi Cepat</h2>
+              <h2 className="text-lg font-bold text-white mb-1">Versi Cepat (Siap Pakai)</h2>
               <p className="text-xs text-slate-400">±7 Menit • 18 Item Utama</p>
             </div>
             <p className="text-xs text-slate-300 leading-relaxed">
-              Cocok untuk evaluasi awal secara efisien. Menghasilkan pemetaan Archetype utama dengan cepat.
+              Tersedia 18 pertanyaan aktif. Mengukur 5 dimensi utama untuk menghasilkan pemetaan Archetype (Phoenix, Pegasus, Griffin, Naga).
             </p>
             <button className="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition-colors">
               Pilih Versi Cepat
@@ -155,11 +173,16 @@ export default function AssessmentPage() {
 
   return (
     <div className="max-w-2xl mx-auto my-8 space-y-6">
-      {/* Progress Bar */}
+      {/* Progress Bar & Demo Auto-fill */}
       <div className="space-y-2">
-        <div className="flex justify-between text-xs text-slate-400">
+        <div className="flex justify-between items-center text-xs text-slate-400">
           <span>Pertanyaan {currentStep + 1} dari {totalQuestions}</span>
-          <span>{progressPercent}% Selesai</span>
+          <button
+            onClick={handleAutoFillDemo}
+            className="text-[11px] font-semibold text-purple-400 hover:text-purple-300 underline bg-purple-500/10 px-2.5 py-1 rounded-lg border border-purple-500/30"
+          >
+            ⚡ Auto-Fill Demo Answers
+          </button>
         </div>
         <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
           <div
@@ -171,9 +194,12 @@ export default function AssessmentPage() {
 
       {/* Question Card */}
       <div className="glass-card p-8 space-y-6 relative">
-        <span className="text-xs font-semibold uppercase tracking-wider text-purple-400">
-          Dimensi: {currentItem.dimension.toUpperCase()}
-        </span>
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold uppercase tracking-wider text-purple-400">
+            Dimensi: {currentItem.dimension.toUpperCase()}
+          </span>
+          <span className="text-[11px] text-slate-500 font-mono">ID: {currentItem.id}</span>
+        </div>
 
         <h2 className="text-xl font-bold text-white leading-snug">
           {currentItem.text}
