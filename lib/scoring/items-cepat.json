@@ -1,0 +1,20 @@
+[
+  { "id": "q1", "dimension": "clarity", "text": "Saya memiliki gambaran yang jelas mengenai prioritas utama hidup saya saat ini.", "reversed": false },
+  { "id": "q2", "dimension": "clarity", "text": "Saya tahu persis langkah konkrit yang harus saya ambil dalam 3 bulan ke depan.", "reversed": false },
+  { "id": "q3", "dimension": "clarity", "text": "Saya sering merasa bingung menentukan mana yang benar-benar penting bagi diri saya.", "reversed": true },
+  { "id": "q4", "dimension": "alignment", "text": "Keputusan yang saya ambil sehari-hari sudah mencerminkan nilai-nilai pribadi saya.", "reversed": false },
+  { "id": "q5", "dimension": "alignment", "text": "Saya merasa menjalani hidup yang diinginkan orang lain, bukan diri saya sendiri.", "reversed": true },
+  { "id": "q6", "dimension": "alignment", "text": "Aktivitas harian saya memberi rasa makna dan kepuasan batin.", "reversed": false },
+  { "id": "q7", "dimension": "readiness", "text": "Saya siap mengalokasikan waktu dan energi untuk melakukan perubahaan nyata.", "reversed": false },
+  { "id": "q8", "dimension": "readiness", "text": "Saya bersedia keluar dari zona nyaman untuk mencapai tujuan baru.", "reversed": false },
+  { "id": "q9", "dimension": "readiness", "text": "Saya terlalu lelah atau tertekan untuk memulai kebiasaan baru saat ini.", "reversed": true },
+  { "id": "q10", "dimension": "agency", "text": "Saya percaya bahwa saya memiliki kendali atas arah masa depan saya.", "reversed": false },
+  { "id": "q11", "dimension": "agency", "text": "Ketika menghadapi hambatan, saya aktif mencari solusi daripada menyerah.", "reversed": false },
+  { "id": "q12", "dimension": "agency", "text": "Kondisi lingkungan di luar kendali saya membuat saya tidak bisa berkembang.", "reversed": true },
+  { "id": "q13", "dimension": "wellbeing", "text": "Secara umum, saya merasa tenang dan optimis menghadapi hari-hari saya.", "reversed": false },
+  { "id": "q14", "dimension": "wellbeing", "text": "Dalam seminggu terakhir, saya merasa sangat kewalahan secara emosional.", "reversed": true },
+  { "id": "q15", "dimension": "wellbeing", "text": "Saya memiliki dukungan moral dari orang-orang terdekat saat butuh bantuan.", "reversed": false },
+  { "id": "q16", "dimension": "s1_self_knowledge", "text": "Saya paham kelebihan dan titik lemah terbesar dalam gaya kerja saya.", "reversed": false },
+  { "id": "q17", "dimension": "s2_option_clarity", "text": "Saya telah mengeksplorasi setidaknya 2-3 pilihan jalur pengembangan diri.", "reversed": false },
+  { "id": "q18_qualitative", "dimension": "qualitative", "type": "text", "text": "Apa tantangan terbesar yang paling membuatmu merasa tertahan saat ini?" }
+]

@@ -1,4 +1,4 @@
-export type Cohort = 'sma' | 'kuliah_29' | '30_plus';
+export type Cohort = 'age_15_18' | 'age_19_29' | 'age_30_plus' | 'sma' | 'kuliah_29' | '30_plus';
 export type VersionType = 'cepat' | 'mendalam';
 export type AssessmentType = 'baseline' | 'reassessment';
 export type Archetype = 'phoenix' | 'pegasus' | 'griffin' | 'naga';

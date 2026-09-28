@@ -1,0 +1,46 @@
+{
+  "cutoff": 60,
+  "gray_zone": { "min": 55, "max": 65 },
+  "archetypes": {
+    "phoenix": {
+      "name": "Phoenix",
+      "emoji": "🔥",
+      "tagline": "Penyelam Jiwa & Pembaru Arah",
+      "strengths": "Keberanian menghadapi krisis nilai dan kemauan belajar ulang dari nol.",
+      "phase": "Pemberontakan Kreatif",
+      "mission": "Menyusun kembali kompas hidup dan memilih 1 eksperimen nyata minggu ini.",
+      "closing": "Kamu tidak hancur; kamu sedang membentuk ulang fondasi yang lebih kokoh.",
+      "evolution_wording": "Kini kamu bergerak dari pembongkaran menuju penataan yang terarah!"
+    },
+    "pegasus": {
+      "name": "Pegasus",
+      "emoji": "🪽",
+      "tagline": "Penjelajah Visi & Pencipta Peluang",
+      "strengths": "Imajinasi luas, wawasan multidimensi, dan keberanian bermimpi besar.",
+      "phase": "Pemetaan Visi",
+      "mission": "Membumikan gagasan besar menjadi tindakan nyata tanpa kehilangan antusiasme.",
+      "closing": "Sayapmu sudah mengepak tinggi; kini saatnya mendaratkan arah dengan presisi.",
+      "evolution_wording": "Visi besarmu kini berpadu dengan momentum eksekusi yang semakin tajam!"
+    },
+    "griffin": {
+      "name": "Griffin",
+      "emoji": "🦅",
+      "tagline": "Strategis Tangguh & Eksekutor Konsisten",
+      "strengths": "Kedisiplinan, kejujuran diri, dan daya tahan tinggi dalam memelihara momentum.",
+      "phase": "Penguatan Fondasi",
+      "mission": "Menajamkan orientasi nilai agar aksi yang konsisten tetap selaras dengan jiwa.",
+      "closing": "Kekuatanmu adalah fondasi; pastikan kompas nilai tetap membimbing langkahmu.",
+      "evolution_wording": "Kedisiplinanmu kini semakin dijiwai oleh kejelasan nilai yang mendalam!"
+    },
+    "naga": {
+      "name": "Naga",
+      "emoji": "🐉",
+      "tagline": "Pilar Arah & Peminformat Arah Hidup",
+      "strengths": "Keseimbangan antara kejelasan visi, keselarasan nilai, dan eksekusi bertahap.",
+      "phase": "Integrasi & Amplifikasi",
+      "mission": "Memperluas dampak positif dan mendampingi orang lain menemukan arahnya.",
+      "closing": "Arahmu sudah jernih; teruslah menyalakan pijar inspirasi di sekitarmu.",
+      "evolution_wording": "Kamu berhasil menjaga harmoni dan konsistensi di setiap dimensi hidup!"
+    }
+  }
+}
